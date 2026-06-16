@@ -113,7 +113,7 @@ By working directly with raw security events rather than dashboards or visualiza
 
 **3. The folder containing the 20 generated datasets**
 
-**4. Splunk ingestion**\
+**4. Splunk ingestion**
 
 **5. Splunk searches and results**
 
@@ -166,7 +166,7 @@ index=auth sourcetype=successful_logins\
 
 Purpose: Verify that the dataset was successfully ingested into Splunk.
 
-lease refer to image # 5 in the repository.
+Please refer to image # 5 in the repository.
 
 **2. View Raw Successful Login Events**
 
