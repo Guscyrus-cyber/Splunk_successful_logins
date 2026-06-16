@@ -114,46 +114,11 @@ By working directly with raw security events rather than dashboards or visualiza
 **3. The folder containing the 20 generated datasets**
 
 **4. Splunk ingestion**\
-**5. Splunk searches and results**\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
+
+**5. Splunk searches and results**
+
+
+
 
 | **\#** | **Dataset File**           | **Splunk Index** |
 |--------|----------------------------|------------------|
@@ -180,23 +145,28 @@ By working directly with raw security events rather than dashboards or visualiza
 
 **Note:** This repository contains one security event investigation from the Splunk Enterprise Tier 1 SOC 20 Security Event Monitoring Lab series. For the remaining security event investigations, please refer to the corresponding repositories in this project collection.
 
+Please refer to images # 1, 2, and 3 in the repository.
+
 **Successful Logins Event**
 
-Dataset: successful_logins.log**\**
-Index: auth**\**
+Dataset: successful_logins.log
+
+Index: auth
+
 Sourcetype: successful_logins
 
-This dataset represents **successful authentication activity**. Unlike failed logins, we're looking at who successfully gained access to the system\
-\
-\
-\
-1. Confirm Dataset Ingestion**
+This dataset represents successful authentication activity. Unlike failed logins, we're looking at who successfully gained access to the system.
+
+Please refer to image # 4 in the repository.
+
+1. **Confirm Dataset Ingestion**
 
 index=auth sourcetype=successful_logins\
 \| stats count by source index sourcetype
 
 Purpose: Verify that the dataset was successfully ingested into Splunk.
 
+lease refer to image # 5 in the repository.
 
 **2. View Raw Successful Login Events**
 
@@ -213,12 +183,11 @@ Purpose: Review all successful authentication events.
 \
 **.** When? Refer to the \_time field.\
 \
-Five user accounts (admin, john, mary, alice, and svc_backup) successfully authenticated to the host MacBookPro. The successful logins originated from six source IP addresses (10.0.0.10, 10.0.0.15, 10.0.0.20, 88.88.88.88, 123.123.123.123, and 192.168.1.50). The authentication events occurred between 08:00:00 and 08:21:00 on June 3, 2026. All login attempts were accepted and resulted in successful access to the target system.\
-\
+Five user accounts (admin, john, mary, alice, and svc_backup) successfully authenticated to the host MacBookPro. The successful logins originated from six source IP addresses (10.0.0.10, 10.0.0.15, 10.0.0.20, 88.88.88.88, 123.123.123.123, and 192.168.1.50). The authentication events occurred between 08:00:00 and 08:21:00 on June 3, 2026. All login attempts were accepted and resulted in successful access to the target system.
 
+lease refer to images # 6 and 7 in the repository.
 
-**\
-3. Successful Logins by User**
+**3. Successful Logins by User**
 
 index=auth sourcetype=successful_logins\
 \| stats count by user\
@@ -248,9 +217,9 @@ Purpose: Identify which users logged in most frequently.
 
 The **mary** and **admin** accounts were the most active users in the dataset, generating the highest number of successful login events. This indicates that these accounts authenticated more frequently than the other user accounts during the observed time period.
 
-\
-\
-4. Successful Logins by Source IP**
+Plrase refer to image # 8 in the repository.
+
+**4. Successful Logins by Source IP**
 
 index=auth sourcetype=successful_logins\
 \| stats count by src_ip\
@@ -261,27 +230,11 @@ Purpose: Identify the IP addresses generating successful authentications.
 **.** What IP address are successfully authenticating most often?\
 \
 The source IP address **10.0.0.20** was the most active authentication source, generating **8 successful login events**.\
-Also Refer to the image \# 9 in the repository for the complete list of source IP addresses and their login counts.\
-\
+Also Refer to the image \# 9 in the repository for the complete list of source IP addresses and their login counts.
 
-**\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-5. Successful Logins by User and Source IP**
+Please refer to image # 9 in the repository.
+
+**5. Successful Logins by User and Source IP**
 
 index=auth sourcetype=successful_logins\
 \| stats count by user src_ip\
@@ -291,28 +244,11 @@ Purpose: Determine which users are authenticating from which IP addresses.
 
 **.** Which users authenticated from multiple source IP addresses?\
 \
-Several users authenticated from multiple source IP addresses. For example, **svc_backup** successfully authenticated from 10.0.0.10, 10.0.0.15, 123.123.123.123, and 192.168.1.50. Similarly, **admin**, **john**, **mary**, and **alice** also authenticated from more than one source IP address.\
-\
+Several users authenticated from multiple source IP addresses. For example, **svc_backup** successfully authenticated from 10.0.0.10, 10.0.0.15, 123.123.123.123, and 192.168.1.50. Similarly, **admin**, **john**, **mary**, and **alice** also authenticated from more than one source IP address.
 
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-6. Successful Logins by Host**
+Please refer to images # 10 and 11 in the repository.
+
+**6. Successful Logins by Host**
 
 index=auth sourcetype=successful_logins\
 \| stats count by host\
@@ -324,22 +260,9 @@ Purpose: Identify which hosts receive the most successful logins.\
 \
 The host **MacBookPro** received **35 successful login events**, making it the most frequently accessed host in the dataset.
 
+Please refer to image # 12 in the repository.
 
-**\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-7. Unique Source IPs Per User**
+**7. Unique Source IPs Per User**
 
 index=auth sourcetype=successful_logins\
 \| stats dc(src_ip) as unique_ips values(src_ip) as source_ips by user\
@@ -351,22 +274,9 @@ Purpose: Identify users authenticating from multiple IP addresses.\
 \
 The accounts **mary** and **svc_backup** authenticated from the highest number of unique source IP addresses, each using **5 different source IPs**. The **admin** and **john** accounts authenticated from **4 unique source IPs**, **alice** from **3**, and **bob** from **2**.
 
+Please refer to images # 13, and 14 in the repository.
 
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-8. Unique Users Per Source IP**
+**8. Unique Users Per Source IP**
 
 index=auth sourcetype=successful_logins\
 \| stats dc(user) as unique_users values(user) as users by src_ip\
@@ -378,10 +288,9 @@ Purpose: Identify systems authenticating as multiple users.
 \
 Five source IP addresses (10.0.0.10, 10.0.0.15, 10.0.0.20, 123.123.123.123, and 88.88.88.88) were each associated with **4 unique user accounts**. Source IP address 192.168.1.50 was associated with **3 unique user accounts**.
 
-\
-\**
-\
-9. Successful Logins Over Time**
+Please refer to images # 15 and 16 in the repository.
+
+**9. Successful Logins Over Time**
 
 index=auth sourcetype=successful_logins\
 \| timechart span=10m count
@@ -409,7 +318,9 @@ No significant spike is visible.
 
 Successful login activity remained stable throughout most of the observation period. Three consecutive 10-minute intervals each recorded 10 successful login events, followed by a decrease to 5 events during the final interval. No unusual spike in authentication activity was identified.
 
-10. SOC Executive Summary Query**
+Please refer to image # 17 in the repository.
+
+**10. SOC Executive Summary Query**
 
 index=auth sourcetype=successful_logins\
 \| stats count as total_logins dc(user) as unique_users dc(src_ip) as unique_source_ips dc(host) as unique_hosts
@@ -433,8 +344,7 @@ Successfully authenticated\
 ↓\
 Access granted
 
-#### \
-. How many successful logins occurred?
+**.** How many successful logins occurred?
 
 A total of 35 successful login events were recorded.
 
@@ -454,35 +364,6 @@ Successful logins were recorded on 1 host.
 
 The dataset contains **35 successful login events** involving **6 unique user accounts**, **6 unique source IP addresses**, and **1 host**. This provides a high-level summary of authentication activity during the observation period.
 
-**\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\
-\**
+Please refer to images # 18 in the repository.
+
+
